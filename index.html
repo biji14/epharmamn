@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="mn" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enerelt Pharma — Чанарыг түгээх, Найдвартай түнш | epharma.mn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:  '#1B2E4B',
+            teal:  '#0A8A7A',
+            jade:  '#27AE60',
+            cream: '#F7F9FC',
+          },
+          fontFamily: {
+            display: ['Sora', 'sans-serif'],
+            sans:    ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg: #F7F9FC;
+      --surface: #ffffff;
+      --surface2: rgba(255,255,255,0.85);
+      --ink: #1B2E4B;
+      --muted: rgba(27,46,75,0.58);
+      --border: rgba(10,138,122,0.12);
+      --border2: rgba(27,46,75,0.10);
+      --teal: #0A8A7A;
+      --jade: #27AE60;
+      --navy: #1B2E4B;
+      --glow-teal: rgba(10,138,122,0.22);
+      --glow-jade: rgba(39,174,96,0.18);
+      --shadow-card: 0 2px 8px rgba(10,138,122,0.06), 0 14px 36px rgba(10,138,122,0.10);
+      --shadow-hero: 0 8px 40px rgba(27,46,75,0.16);
+      --shadow-btn:  0 4px 14px rgba(10,138,122,0.35);
+    }
+
+    [data-theme="dark"] {
+      --bg: #05080F;
+      --surface: #0C1220;
+      --surface2: rgba(12,18,32,0.88);
+      --ink: #E8EEF8;
+      --muted: rgba(232,238,248,0.52);
+      --border: rgba(10,138,122,0.18);
+      --border2: rgba(255,255,255,0.08);
+      --glow-teal: rgba(10,138,122,0.30);
+      --glow-jade: rgba(39,174,96,0.22);
+      --shadow-card: 0 2px 8px rgba(0,0,0,0.35), 0 14px 36px rgba(0,0,0,0.55);
+      --shadow-hero: 0 8px 60px rgba(0,0,0,0.65);
+      --shadow-btn:  0 4px 20px rgba(10,138,122,0.45);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* Noise overlay */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 9998;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 1;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .font-display { font-family: 'Sora', sans-serif; }
+    h1,h2,h3 { font-family: 'Sora', sans-serif; line-height: 1.1; }
+
+    /* ── GRADIENTS ── */
+    .grad { background: linear-gradient(135deg, #0A8A7A, #27AE60); }
+    .text-grad {
+      background: linear-gradient(135deg, #0A8A7A, #27AE60);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .text-grad-rev {
+      background: linear-gradient(135deg, #27AE60, #0A8A7A);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── NAV ── */
+    .nav-glass {
+      background: var(--surface2);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border2);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .nav-pill {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      padding: 4px 6px;
+      display: flex; align-items: center; gap: 2px;
+    }
+    .nav-link {
+      font-size: 13.5px; font-weight: 600;
+      color: var(--ink); opacity: 0.72;
+      padding: 8px 12px; border-radius: 999px;
+      transition: opacity 0.18s, background 0.18s, transform 0.18s;
+    }
+    .nav-link:hover { opacity: 1; background: rgba(10,138,122,0.08); transform: translateY(-1px); }
+    .nav-social {
+      display: flex; align-items: center; gap: 2px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 999px; padding: 4px;
+    }
+    .nav-social a {
+      width: 36px; height: 36px; border-radius: 999px;
+      display: grid; place-items: center;
+      color: var(--ink); opacity: 0.55;
+      transition: opacity 0.18s, background 0.18s, transform 0.18s;
+    }
+    .nav-social a:hover { opacity: 1; background: rgba(10,138,122,0.09); transform: translateY(-1px); }
+
+    .lang-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 999px; padding: 4px;
+      display: flex; align-items: center; gap: 2px;
+    }
+    .lang-btn {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 700;
+      padding: 7px 10px; border-radius: 999px; border: none;
+      cursor: pointer; background: transparent; color: var(--ink); opacity: 0.55;
+      transition: opacity 0.18s, background 0.18s;
+    }
+    .lang-btn.active {
+      background: linear-gradient(135deg, #0A8A7A, #27AE60);
+      color: #fff; opacity: 1;
+    }
+    .lang-btn:not(.active):hover { opacity: 0.85; background: rgba(10,138,122,0.08); }
+
+    .theme-btn {
+      width: 40px; height: 40px; border-radius: 999px;
+      border: 1px solid var(--border2);
+      background: var(--surface);
+      display: grid; place-items: center;
+      cursor: pointer; color: var(--ink); opacity: 0.65;
+      transition: opacity 0.18s, background 0.18s, transform 0.18s, border-color 0.18s;
+    }
+    .theme-btn:hover { opacity: 1; transform: translateY(-1px); border-color: rgba(10,138,122,0.25); }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #0A8A7A, #27AE60);
+      color: #fff; font-weight: 700; border-radius: 999px;
+      box-shadow: var(--shadow-btn);
+      transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(10,138,122,0.42); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #27AE60; outline-offset: 3px; }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--surface); color: var(--teal);
+      font-weight: 700; border-radius: 999px;
+      transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), background 0.2s, box-shadow 0.2s;
+    }
+    .btn-ghost:hover { transform: translateY(-2px); background: rgba(10,138,122,0.06); box-shadow: 0 4px 14px rgba(10,138,122,0.12); }
+
+    /* ── HERO ── */
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 65% 60% at 88% 8%, rgba(10,138,122,0.13), transparent 60%),
+        radial-gradient(ellipse 50% 50% at 8% 90%, rgba(39,174,96,0.10), transparent 60%),
+        var(--bg);
+    }
+    [data-theme="dark"] .hero-bg {
+      background:
+        radial-gradient(ellipse 65% 60% at 88% 8%, rgba(10,138,122,0.20), transparent 60%),
+        radial-gradient(ellipse 50% 50% at 8% 90%, rgba(39,174,96,0.14), transparent 60%),
+        var(--bg);
+    }
+
+    @keyframes blob1 { 0%,100%{transform:translate(0,0)scale(1);}33%{transform:translate(16px,-14px)scale(1.05);}66%{transform:translate(-10px,12px)scale(0.96);} }
+    @keyframes blob2 { 0%,100%{transform:translate(0,0)scale(1);}33%{transform:translate(-12px,10px)scale(1.04);}66%{transform:translate(14px,-16px)scale(0.97);} }
+    .blob1 { animation: blob1 11s ease-in-out infinite; }
+    .blob2 { animation: blob2 14s ease-in-out infinite; }
+
+    @keyframes float1 { 0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(-14px) rotate(5deg);} }
+    @keyframes float2 { 0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(-10px) rotate(-6deg);} }
+    @keyframes float3 { 0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(-18px) rotate(4deg);} }
+    .float1 { animation: float1 6s ease-in-out infinite; }
+    .float2 { animation: float2 8s ease-in-out infinite 1s; }
+    .float3 { animation: float3 7s ease-in-out infinite 2s; }
+
+    @keyframes heroFadeUp { from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);} }
+    .he { animation: heroFadeUp 0.8s cubic-bezier(.16,1,.3,1) both; }
+    .he1{animation-delay:.05s;} .he2{animation-delay:.15s;} .he3{animation-delay:.25s;}
+    .he4{animation-delay:.35s;} .he5{animation-delay:.50s;}
+
+    @keyframes cardFloat { 0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);} }
+    .card-float { animation: cardFloat 5.5s ease-in-out infinite; }
+
+    @keyframes ping { 75%,100%{transform:scale(2);opacity:0;} }
+    .ping-dot { animation: ping 1.6s cubic-bezier(0,0,.2,1) infinite; }
+
+    @keyframes bob { 0%,100%{transform:translateY(0);}50%{transform:translateY(5px);} }
+
+    /* Hero card */
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 24px;
+      box-shadow: var(--shadow-hero);
+      overflow: hidden;
+    }
+    [data-theme="dark"] .hero-card { border-color: rgba(255,255,255,0.08); }
+
+    /* Floating badge */
+    .float-badge {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      padding: 10px 14px;
+      box-shadow: var(--shadow-card);
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    /* Trust pills */
+    .trust-pill {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    [data-theme="dark"] .trust-pill { border-color: rgba(255,255,255,0.07); }
+
+    /* ── SECTIONS ── */
+    .section { padding: 96px 0; }
+    .section-alt {
+      background:
+        radial-gradient(ellipse 55% 60% at 95% 50%, rgba(10,138,122,0.07), transparent 60%),
+        radial-gradient(ellipse 45% 55% at 5% 30%, rgba(39,174,96,0.05), transparent 60%),
+        var(--surface);
+    }
+    [data-theme="dark"] .section-alt {
+      background:
+        radial-gradient(ellipse 55% 60% at 95% 50%, rgba(10,138,122,0.12), transparent 60%),
+        radial-gradient(ellipse 45% 55% at 5% 30%, rgba(39,174,96,0.08), transparent 60%),
+        var(--surface);
+    }
+    .section-navy {
+      background:
+        radial-gradient(ellipse 65% 70% at 20% 50%, rgba(10,138,122,0.18), transparent 60%),
+        radial-gradient(ellipse 50% 50% at 85% 20%, rgba(39,174,96,0.12), transparent 60%),
+        #1B2E4B;
+    }
+
+    /* ── BADGE ── */
+    .badge-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, rgba(10,138,122,0.10), rgba(39,174,96,0.10));
+      border: 1px solid rgba(10,138,122,0.18);
+      border-radius: 999px; padding: 6px 14px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--teal);
+    }
+    .divider { width: 48px; height: 3px; background: linear-gradient(90deg,#0A8A7A,#27AE60); border-radius: 2px; }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.22s ease, border-color 0.22s;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 4px 14px rgba(10,138,122,0.08), 0 22px 54px rgba(10,138,122,0.14); border-color: rgba(10,138,122,0.20); }
+    [data-theme="dark"] .card { border-color: rgba(255,255,255,0.07); }
+    [data-theme="dark"] .card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.4), 0 22px 54px rgba(0,0,0,0.6); border-color: rgba(10,138,122,0.30); }
+
+    .icon-box {
+      width: 44px; height: 44px; border-radius: 14px;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, rgba(10,138,122,0.12), rgba(39,174,96,0.12));
+      border: 1px solid rgba(10,138,122,0.18);
+    }
+
+    /* Image treatment */
+    .img-wrap { position: relative; overflow: hidden; }
+    .img-wrap img { transition: transform 0.55s ease; display: block; }
+    .img-wrap:hover img { transform: scale(1.04); }
+    .img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(27,46,75,0.65) 0%, transparent 58%); pointer-events: none; }
+    .img-tint    { position: absolute; inset: 0; background: rgba(10,138,122,0.15); mix-blend-mode: multiply; pointer-events: none; }
+
+    /* Value cards */
+    .value-card {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-radius: 20px; padding: 24px;
+      transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), border-color 0.22s, box-shadow 0.22s;
+    }
+    .value-card:hover { transform: translateY(-4px); border-color: rgba(10,138,122,0.22); box-shadow: 0 4px 14px rgba(10,138,122,0.08), 0 16px 40px rgba(10,138,122,0.12); }
+    [data-theme="dark"] .value-card { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.07); }
+
+    /* Contact item */
+    .contact-item {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-radius: 16px; padding: 14px 16px;
+      display: flex; align-items: flex-start; gap: 12px;
+      transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), border-color 0.18s;
+    }
+    .contact-item:hover { transform: translateY(-2px); border-color: rgba(10,138,122,0.22); }
+    [data-theme="dark"] .contact-item { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.07); }
+
+    /* Form */
+    .form-input {
+      width: 100%; padding: 12px 14px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border2);
+      color: var(--ink); font: inherit; font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input:focus { border-color: rgba(10,138,122,0.45); box-shadow: 0 0 0 4px rgba(10,138,122,0.10); }
+    .form-input::placeholder { color: var(--muted); }
+    [data-theme="dark"] .form-input { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.10); }
+
+    /* Marquee */
+    @keyframes marquee { 0%{transform:translateX(0);}100%{transform:translateX(-50%);} }
+    .marquee-track { animation: marquee 24s linear infinite; width: max-content; }
+    .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+
+    /* Scroll reveal */
+    .reveal       { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal-left  { opacity:0; transform:translateX(-32px); transition:opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal-right { opacity:0; transform:translateX(32px);  transition:opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal-scale { opacity:0; transform:scale(.93); transition:opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal.in-view, .reveal.visible       { opacity:1; transform:translateY(0); }
+    .reveal-left.in-view, .reveal-left.visible   { opacity:1; transform:translateX(0); }
+    .reveal-right.in-view, .reveal-right.visible { opacity:1; transform:translateX(0); }
+    .reveal-scale.in-view, .reveal-scale.visible { opacity:1; transform:scale(1); }
+    .delay-1{transition-delay:.10s!important;} .delay-2{transition-delay:.20s!important;}
+    .delay-3{transition-delay:.30s!important;} .delay-4{transition-delay:.40s!important;}
+
+    /* Progress */
+    #progress-bar { position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#0A8A7A,#27AE60);z-index:9999;width:0;transition:width .1s linear;border-radius:0 2px 2px 0; }
+
+    /* Mobile menu */
+    #mobile-menu { transition: max-height 0.35s ease, opacity 0.3s ease; }
+
+    /* Footer */
+    .footer-link { font-size: 14px; color: rgba(255,255,255,0.55); transition: color 0.18s; }
+    .footer-link:hover { color: rgba(255,255,255,0.90); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<!-- ════════════════════════════════ NAV ════════════════════════════════ -->
+<header class="nav-glass fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-5 lg:px-10 flex items-center justify-between" style="height:72px;">
+
+    <!-- Brand -->
+    <a href="#" class="flex items-center gap-3 shrink-0">
+      <img src="brand_assets/ENERELT PHARMA final.png" alt="Enerelt Pharma" class="h-14 w-auto" />
+      <div class="hidden sm:block">
+        <p class="font-display text-sm" style="font-weight:800;letter-spacing:0.5px;color:var(--ink);">ENERELT PHARMA</p>
+        <p class="text-xs" style="color:var(--muted);margin-top:1px;" data-mn="Чанарыг түгээх, Найдвартай түнш" data-en="Spreading Quality, Trusted Partner">Чанарыг түгээх, Найдвартай түнш</p>
+      </div>
+    </a>
+
+    <!-- Nav links (desktop) -->
+    <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
+      <a href="#about"   class="nav-link" data-mn="Бидний тухай" data-en="About">Бидний тухай</a>
+      <a href="#focus"   class="nav-link" data-mn="Чиглэл"       data-en="Focus">Чиглэл</a>
+      <a href="#values"  class="nav-link" data-mn="Үнэт зүйлс"   data-en="Values">Үнэт зүйлс</a>
+      <a href="#contact" class="nav-link" data-mn="Холбоо барих"  data-en="Contact">Холбоо барих</a>
+    </nav>
+
+    <!-- Right actions -->
+    <div class="flex items-center gap-2">
+      <!-- Language -->
+      <div class="hidden md:flex lang-wrap" aria-label="Language">
+        <button id="btn-mn" class="lang-btn active" onclick="setLang('mn')">
+          <img src="https://flagcdn.com/20x15/mn.png" srcset="https://flagcdn.com/40x30/mn.png 2x" alt="" style="width:18px;height:auto;border-radius:3px;" /><span>MN</span>
+        </button>
+        <button id="btn-en" class="lang-btn" onclick="setLang('en')">
+          <img src="https://flagcdn.com/20x15/gb.png" srcset="https://flagcdn.com/40x30/gb.png 2x" alt="" style="width:18px;height:auto;border-radius:3px;" /><span>EN</span>
+        </button>
+      </div>
+
+      <!-- Dark mode -->
+      <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
+        <svg id="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M21 12.6A8.5 8.5 0 1 1 11.4 3a6.5 6.5 0 0 0 9.6 9.6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- CTA -->
+      <a href="#contact" class="btn-primary hidden lg:inline-flex text-sm px-5 py-2.5"
+         data-mn="Холбоо барих" data-en="Get in Touch">Холбоо барих</a>
+
+      <!-- Hamburger -->
+      <button id="menu-toggle" class="lg:hidden theme-btn" aria-label="Open menu">
+        <svg id="icon-open" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg id="icon-close" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="lg:hidden overflow-hidden max-h-0 opacity-0">
+    <div class="px-5 pt-3 pb-5 border-t flex flex-col gap-1" style="border-color:var(--border2);">
+      <a href="#about"   class="nav-link" data-mn="Бидний тухай" data-en="About">Бидний тухай</a>
+      <a href="#focus"   class="nav-link" data-mn="Чиглэл"       data-en="Focus">Чиглэл</a>
+      <a href="#values"  class="nav-link" data-mn="Үнэт зүйлс"   data-en="Values">Үнэт зүйлс</a>
+      <a href="#contact" class="nav-link" data-mn="Холбоо барих"  data-en="Contact">Холбоо барих</a>
+      <div class="flex gap-2 pt-3">
+        <button id="btn-mn-m" class="lang-btn active flex-1 justify-center" onclick="setLang('mn')" style="border:1px solid var(--border2);border-radius:999px;">
+          <img src="https://flagcdn.com/20x15/mn.png" srcset="https://flagcdn.com/40x30/mn.png 2x" alt="" style="width:18px;border-radius:3px;" /><span>MN</span>
+        </button>
+        <button id="btn-en-m" class="lang-btn flex-1 justify-center" onclick="setLang('en')" style="border:1px solid var(--border2);border-radius:999px;">
+          <img src="https://flagcdn.com/20x15/gb.png" srcset="https://flagcdn.com/40x30/gb.png 2x" alt="" style="width:18px;border-radius:3px;" /><span>EN</span>
+        </button>
+      </div>
+      <a href="#contact" class="btn-primary text-sm px-5 py-3 text-center mt-2"
+         data-mn="Холбоо барих" data-en="Get in Touch">Холбоо барих</a>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════ HERO ════════════════════════════════ -->
+<section class="hero-bg relative overflow-hidden pt-44 pb-28 px-5 lg:px-10">
+
+  <!-- Blobs -->
+  <div class="blob1 pointer-events-none absolute -top-48 -right-48 w-[640px] h-[640px] rounded-full"
+       style="background:radial-gradient(circle,rgba(10,138,122,0.14) 0%,transparent 70%);opacity:.7;"></div>
+  <div class="blob2 pointer-events-none absolute bottom-0 -left-36 w-[480px] h-[480px] rounded-full"
+       style="background:radial-gradient(circle,rgba(39,174,96,0.11) 0%,transparent 70%);opacity:.6;"></div>
+
+  <!-- Floating pills -->
+  <div class="float1 pointer-events-none absolute top-40 right-[11%] w-14 h-5 rounded-full opacity-15" style="background:linear-gradient(135deg,#0A8A7A,#27AE60);"></div>
+  <div class="float2 pointer-events-none absolute top-56 right-[6%]  w-9  h-4 rounded-full opacity-10" style="background:#27AE60;transform:rotate(32deg);"></div>
+  <div class="float3 pointer-events-none absolute bottom-40 left-[5%] w-12 h-4 rounded-full opacity-10" style="background:#0A8A7A;transform:rotate(-18deg);"></div>
+
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+
+    <!-- Left text -->
+    <div>
+      <div class="he he1 badge-tag mb-6" style="width:fit-content;">
+        <span class="relative flex h-2 w-2">
+          <span class="ping-dot absolute inline-flex h-full w-full rounded-full" style="background:var(--jade);opacity:.7;"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full" style="background:var(--jade);"></span>
+        </span>
+        <span data-mn="Монгол улсын эм зүйн түнш" data-en="Pharmaceutical Partner for Mongolia">Монгол улсын эм зүйн түнш</span>
+      </div>
+
+      <h1 class="he he2 text-5xl lg:text-6xl font-display font-bold" style="letter-spacing:-0.03em;color:var(--ink);">
+        <span data-mn="Монголд" data-en="Bringing">Монголд</span><br/>
+        <span class="text-grad" data-mn="Чанарын Эм" data-en="Quality Medicine">Чанарын Эм</span><br/>
+        <span data-mn="Хүргэх Зорилготой" data-en="to Mongolia">Хүргэх Зорилготой</span>
+      </h1>
+
+      <p class="he he3 mt-6 text-base max-w-lg" style="line-height:1.78;color:var(--muted);"
+         data-mn="Enerelt Pharma бол Монгол улсад дэлхийн стандартын эм, хүнсний нэмэлт бүтээгдэхүүнийг хүргэх зорилготой байгуулагдсан эм зүйн импорт, дистрибьюшн компани юм."
+         data-en="Enerelt Pharma is a newly established pharmaceutical import and distribution company, founded to bring world-standard medicines and health supplements to Mongolia.">
+        Enerelt Pharma бол Монгол улсад дэлхийн стандартын эм, хүнсний нэмэлт бүтээгдэхүүнийг хүргэх зорилготой байгуулагдсан эм зүйн импорт, дистрибьюшн компани юм.
+      </p>
+
+      <div class="he he4 mt-9 flex flex-wrap gap-4">
+        <a href="#focus" class="btn-primary text-sm px-7 py-3.5"
+           data-mn="Бидний чиглэл" data-en="Our Focus">
+          <span>Бидний чиглэл</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#contact" class="btn-ghost text-sm px-7 py-3.5"
+           data-mn="Холбоо барих" data-en="Contact Us">Холбоо барих</a>
+      </div>
+
+      <!-- Trust pills -->
+      <div class="he he5 mt-11 grid grid-cols-3 gap-3">
+        <div class="trust-pill">
+          <div class="icon-box mb-2.5" style="width:32px;height:32px;border-radius:10px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="#0A8A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="text-xs font-bold" style="color:var(--ink);line-height:1.3;" data-mn="Баталгаажсан чанар" data-en="Certified Quality">Баталгаажсан чанар</p>
+        </div>
+        <div class="trust-pill">
+          <div class="icon-box mb-2.5" style="width:32px;height:32px;border-radius:10px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#27AE60" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <p class="text-xs font-bold" style="color:var(--ink);line-height:1.3;" data-mn="Дэлхийн хамтын ажиллагаа" data-en="Global Partnerships">Дэлхийн хамтын ажиллагаа</p>
+        </div>
+        <div class="trust-pill">
+          <div class="icon-box mb-2.5" style="width:32px;height:32px;border-radius:10px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke="#0A8A7A" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <p class="text-xs font-bold" style="color:var(--ink);line-height:1.3;" data-mn="Өвчтөнд анхаарал" data-en="Patient-Focused">Өвчтөнд анхаарал</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right card -->
+    <div class="he he5 relative flex justify-center lg:justify-end">
+      <div class="relative w-full max-w-lg">
+        <!-- Glow halo -->
+        <div class="absolute inset-0 rounded-3xl pointer-events-none" style="background:radial-gradient(ellipse at 50% 50%,rgba(10,138,122,0.22) 0%,transparent 70%);filter:blur(40px);"></div>
+
+        <!-- Card -->
+        <div class="card-float hero-card">
+          <div class="img-wrap" style="height:280px;">
+            <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=700&q=80&auto=format&fit=crop"
+                 alt="Pharmaceutical laboratory" class="w-full h-full object-cover" loading="eager" />
+            <div class="img-overlay"></div>
+            <div class="img-tint"></div>
+            <div class="absolute bottom-5 left-5 right-5">
+              <span class="text-xs font-semibold text-white bg-white/15 backdrop-blur-sm px-3 py-1 rounded-full border border-white/20 inline-block mb-2"
+                    data-mn="Бидний эрхэм зорилго" data-en="Our Mission">Бидний эрхэм зорилго</span>
+              <p class="font-display text-xl font-bold text-white leading-tight"
+                 data-mn='"Чанар хүргэж, Итгэл бий болгох"' data-en='"Delivering quality, Building trust"'>"Чанар хүргэж, Итгэл бий болгох"</p>
+            </div>
+          </div>
+          <div class="p-5 flex items-center gap-4">
+            <img src="brand_assets/ENERELT PHARMA final.png" alt="logo" class="h-9 w-auto shrink-0" />
+            <div>
+              <p class="text-xs font-bold uppercase tracking-wider" style="color:var(--teal);"
+                 data-mn="Монгол улсын зах зээлд" data-en="Serving the Mongolian market">Монгол улсын зах зээлд</p>
+              <p class="text-sm mt-0.5" style="color:var(--muted);"
+                 data-mn="Итгэмжлэгдсэн импортлогч &amp; дистрибьютор" data-en="Certified importer &amp; distributor">Итгэмжлэгдсэн импортлогч &amp; дистрибьютор</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30 pointer-events-none">
+    <p class="text-xs font-semibold uppercase tracking-widest" style="color:var(--ink);"
+       data-mn="Доош гүйлгэх" data-en="Scroll">Доош гүйлгэх</p>
+    <div class="w-5 h-8 rounded-full border-2 flex justify-center pt-1.5" style="border-color:var(--ink);">
+      <div class="w-1 h-2 rounded-full" style="background:var(--ink);animation:bob 1.6s ease-in-out infinite;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ ABOUT ════════════════════════════════ -->
+<section id="about" class="section section-alt px-5 lg:px-10">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+
+    <div class="grid grid-cols-2 gap-4 reveal-left">
+      <div class="col-span-2 img-wrap rounded-2xl relative overflow-hidden" style="height:240px;">
+        <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&q=80&auto=format&fit=crop"
+             alt="Pharmaceutical distribution" class="w-full h-full object-cover" loading="lazy" />
+        <div class="img-overlay"></div>
+        <div class="img-tint"></div>
+        <span class="absolute bottom-4 left-4 text-white text-sm font-semibold drop-shadow"
+              data-mn="Чанарын эм зүйн хангамж" data-en="Quality pharmaceutical supply">Чанарын эм зүйн хангамж</span>
+      </div>
+      <div class="img-wrap rounded-2xl relative overflow-hidden" style="height:180px;">
+        <img src="https://images.unsplash.com/photo-1576671081837-49000212a74e?w=400&q=80&auto=format&fit=crop"
+             alt="Health supplements" class="w-full h-full object-cover" loading="lazy" />
+        <div class="img-overlay"></div>
+        <div class="img-tint" style="background:rgba(10,138,122,0.20);"></div>
+        <span class="absolute bottom-3 left-3 text-white text-xs font-semibold drop-shadow"
+              data-mn="Хүнсний нэмэлт" data-en="Health Supplements">Хүнсний нэмэлт</span>
+      </div>
+      <div class="img-wrap rounded-2xl relative overflow-hidden" style="height:180px;">
+        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&q=80&auto=format&fit=crop"
+             alt="Medical care" class="w-full h-full object-cover" loading="lazy" />
+        <div class="img-overlay"></div>
+        <div class="img-tint" style="background:rgba(39,174,96,0.15);"></div>
+        <span class="absolute bottom-3 left-3 text-white text-xs font-semibold drop-shadow"
+              data-mn="Эрүүл мэндийн тусламж" data-en="Healthcare Support">Эрүүл мэндийн тусламж</span>
+      </div>
+    </div>
+
+    <div class="reveal-right">
+      <div class="badge-tag mb-6">
+        <span class="w-1.5 h-1.5 rounded-full" style="background:var(--teal);"></span>
+        <span data-mn="Бидний тухай" data-en="About Us">Бидний тухай</span>
+      </div>
+      <h2 class="text-4xl font-bold" style="letter-spacing:-0.03em;color:var(--ink);"
+          data-mn="Монголын Эрүүл Мэндийн Зах Зээлд Чанарыг Авчрах" data-en="Bringing Quality to Mongolia's Healthcare Market">
+        Монголын Эрүүл Мэндийн Зах Зээлд Чанарыг Авчрах
+      </h2>
+      <div class="divider mt-5 mb-6"></div>
+      <p class="text-sm mb-4" style="line-height:1.78;color:var(--muted);"
+         data-mn="Enerelt Pharma нь Монгол улсын эрүүл мэндийн стандартыг дэлхийн түвшинд хүргэх зорилгоор байгуулагдсан. Бид Монголын эмч, эмийн сан болон өвчтөнүүдэд зориулан олон улсын нэр хүндтэй үйлдвэрлэгчдийн чанарын бүтээгдэхүүнийг хүргэхийг зорьж байна."
+         data-en="Enerelt Pharma was founded with a clear purpose: to raise healthcare standards in Mongolia to a global level. We are committed to connecting Mongolian doctors, pharmacies, and patients with quality products from internationally reputable manufacturers.">
+        Enerelt Pharma нь Монгол улсын эрүүл мэндийн стандартыг дэлхийн түвшинд хүргэх зорилгоор байгуулагдсан. Бид Монголын эмч, эмийн сан болон өвчтөнүүдэд зориулан олон улсын нэр хүндтэй үйлдвэрлэгчдийн чанарын бүтээгдэхүүнийг хүргэхийг зорьж байна.
+      </p>
+      <p class="text-sm" style="line-height:1.78;color:var(--muted);"
+         data-mn="Манай баг нь эм зүй, эрүүл мэндийн менежментийн салбарт мэргэшсэн мэргэжилтнүүдээс бүрдэх бөгөөд бид хангамжийн сүлжээний бүх үе шатанд өндөр стандартыг мөрдөхийг шаарддаг."
+         data-en="Our team consists of professionals with expertise in pharmacy and healthcare management. We hold every stage of our supply chain to the highest standards — from sourcing to last-mile delivery.">
+        Манай баг нь эм зүй, эрүүл мэндийн менежментийн салбарт мэргэшсэн мэргэжилтнүүдээс бүрдэх бөгөөд бид хангамжийн сүлжээний бүх үе шатанд өндөр стандартыг мөрдөхийг шаарддаг.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <div class="flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-semibold" style="background:var(--surface);border-color:var(--border);color:var(--ink);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="#0A8A7A" stroke-width="2" stroke-linecap="round"/></svg>
+          <span data-mn="Зөвхөн баталгаажсан бүтээгдэхүүн" data-en="Only certified products">Зөвхөн баталгаажсан бүтээгдэхүүн</span>
+        </div>
+        <div class="flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-semibold" style="background:var(--surface);border-color:var(--border);color:var(--ink);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke="#27AE60" stroke-width="2" stroke-linecap="round"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke="#27AE60" stroke-width="2" stroke-linecap="round"/></svg>
+          <span data-mn="Улс даяар хүргэх боломж" data-en="Nationwide delivery capability">Улс даяар хүргэх боломж</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ FOCUS ════════════════════════════════ -->
+<section id="focus" class="section px-5 lg:px-10" style="background:var(--bg);">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <div class="badge-tag mb-5" style="display:inline-flex;">
+        <span class="w-1.5 h-1.5 rounded-full" style="background:var(--jade);"></span>
+        <span data-mn="Үйл ажиллагааны чиглэл" data-en="Our Focus Areas">Үйл ажиллагааны чиглэл</span>
+      </div>
+      <h2 class="text-4xl font-bold" style="letter-spacing:-0.03em;color:var(--ink);"
+          data-mn="Бид Юунд Анхаардаг Вэ" data-en="What We Focus On">Бид Юунд Анхаардаг Вэ</h2>
+      <div class="divider mx-auto mt-4 mb-5"></div>
+      <p class="text-sm max-w-2xl mx-auto" style="line-height:1.78;color:var(--muted);"
+         data-mn="Бид Монгол улсын эрүүл мэндийн хэрэгцээнд нийцсэн дараах чиглэлүүдэд анхаарлаа хандуулж байна."
+         data-en="We are focused on the following areas that directly address Mongolia's healthcare needs.">
+        Бид Монгол улсын эрүүл мэндийн хэрэгцээнд нийцсэн дараах чиглэлүүдэд анхаарлаа хандуулж байна.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <div class="card overflow-hidden reveal delay-1">
+        <div class="img-wrap relative" style="height:190px;">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=560&q=80&auto=format&fit=crop" alt="Food supplements" class="w-full h-full object-cover" loading="lazy"/>
+          <div class="img-overlay"></div>
+          <div class="img-tint" style="background:rgba(10,138,122,0.18);"></div>
+          <div class="absolute top-4 left-4">
+            <div class="icon-box" style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.90);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke="#0A8A7A" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-bold text-base mb-2" style="color:var(--ink);" data-mn="Хүнсний нэмэлт" data-en="Food Supplements">Хүнсний нэмэлт</h3>
+          <p class="text-sm" style="line-height:1.72;color:var(--muted);"
+             data-mn="Витамин, эрдэс бодис, омега-3, пробиотик болон мэргэшсэн нэмэлт тэжээлийн бүтээгдэхүүн — GMP баталгаажуулсан үйлдвэрлэгчдээс."
+             data-en="Vitamins, minerals, omega-3, probiotics, and specialized nutraceuticals from GMP-certified manufacturers.">
+            Витамин, эрдэс бодис, омега-3, пробиотик болон мэргэшсэн нэмэлт тэжээлийн бүтээгдэхүүн — GMP баталгаажуулсан үйлдвэрлэгчдээс.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(10,138,122,0.10);color:var(--teal);" data-mn="Витамин" data-en="Vitamins">Витамин</span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(10,138,122,0.10);color:var(--teal);" data-mn="Эрдэс бодис" data-en="Minerals">Эрдэс бодис</span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(10,138,122,0.10);color:var(--teal);" data-mn="Пробиотик" data-en="Probiotics">Пробиотик</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card overflow-hidden reveal delay-2">
+        <div class="img-wrap relative" style="height:190px;">
+          <img src="https://images.unsplash.com/photo-1585435421671-0c16764628a3?w=560&q=80&auto=format&fit=crop" alt="Medicines" class="w-full h-full object-cover" loading="lazy"/>
+          <div class="img-overlay"></div>
+          <div class="img-tint" style="background:rgba(27,46,75,0.18);"></div>
+          <div class="absolute top-4 left-4">
+            <div class="icon-box" style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.90);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="#27AE60" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-bold text-base mb-2" style="color:var(--ink);" data-mn="Жороор олгох эм" data-en="Prescription Medicines">Жороор олгох эм</h3>
+          <p class="text-sm" style="line-height:1.72;color:var(--muted);"
+             data-mn="Зүрх судас, бодисын солилцоо, амьсгалын зам зэрэг чиглэлээр олон улсын нэр хүндтэй брэндүүдийн эмийн хангамж."
+             data-en="Supply of internationally recognized brand medicines across cardiovascular, metabolic, and respiratory areas.">
+            Зүрх судас, бодисын солилцоо, амьсгалын зам зэрэг чиглэлээр олон улсын нэр хүндтэй брэндүүдийн эмийн хангамж.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(39,174,96,0.10);color:var(--jade);" data-mn="Зүрх судас" data-en="Cardiovascular">Зүрх судас</span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(39,174,96,0.10);color:var(--jade);" data-mn="Амьсгал" data-en="Respiratory">Амьсгал</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card overflow-hidden reveal delay-3">
+        <div class="img-wrap relative" style="height:190px;">
+          <img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=560&q=80&auto=format&fit=crop" alt="OTC products" class="w-full h-full object-cover" loading="lazy"/>
+          <div class="img-overlay"></div>
+          <div class="img-tint" style="background:rgba(27,46,75,0.15);"></div>
+          <div class="absolute top-4 left-4">
+            <div class="icon-box" style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.90);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke="#1B2E4B" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-bold text-base mb-2" style="color:var(--ink);" data-mn="Эмийн сангийн OTC бүтээгдэхүүн" data-en="Over-the-Counter (OTC)">Эмийн сангийн OTC бүтээгдэхүүн</h3>
+          <p class="text-sm" style="line-height:1.72;color:var(--muted);"
+             data-mn="Өдөр тутмын эрүүл мэндийн хэрэгцээнд зориулсан — өвдөлт намдаах, хүйтэн ханиад, арьс арчилгааны болон бусад бүтээгдэхүүн."
+             data-en="Products for everyday health needs — pain relief, cold and flu, skincare, and more.">
+            Өдөр тутмын эрүүл мэндийн хэрэгцээнд зориулсан — өвдөлт намдаах, хүйтэн ханиад, арьс арчилгааны болон бусад бүтээгдэхүүн.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(27,46,75,0.08);color:var(--navy);" data-mn="Өвдөлт намдаах" data-en="Pain Relief">Өвдөлт намдаах</span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(27,46,75,0.08);color:var(--navy);" data-mn="Арьс арчилгаа" data-en="Skincare">Арьс арчилгаа</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card overflow-hidden reveal delay-1">
+        <div class="img-wrap relative" style="height:190px;">
+          <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?w=560&q=80&auto=format&fit=crop" alt="Pediatric" class="w-full h-full object-cover" loading="lazy"/>
+          <div class="img-overlay"></div>
+          <div class="img-tint" style="background:rgba(10,138,122,0.12);"></div>
+          <div class="absolute top-4 left-4">
+            <div class="icon-box" style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.90);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#0A8A7A" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-bold text-base mb-2" style="color:var(--ink);" data-mn="Хүүхдийн эрүүл мэнд" data-en="Pediatric Health">Хүүхдийн эрүүл мэнд</h3>
+          <p class="text-sm" style="line-height:1.72;color:var(--muted);"
+             data-mn="Нярайгаас хүүхэд хүртэл зориулсан аюулгүй, баталгаажуулсан эм, витамин болон дархлаа бэхжүүлэгч бүтээгдэхүүн."
+             data-en="Safe, certified medicines, vitamins, and immunity products for infants through children.">
+            Нярайгаас хүүхэд хүртэл зориулсан аюулгүй, баталгаажуулсан эм, витамин болон дархлаа бэхжүүлэгч бүтээгдэхүүн.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(10,138,122,0.10);color:var(--teal);" data-mn="Нярайн арчилгаа" data-en="Infant Care">Нярайн арчилгаа</span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(10,138,122,0.10);color:var(--teal);" data-mn="Дархлаа" data-en="Immunity">Дархлаа</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card overflow-hidden reveal delay-2">
+        <div class="img-wrap relative" style="height:190px;">
+          <img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=560&q=80&auto=format&fit=crop" alt="Medical devices" class="w-full h-full object-cover" loading="lazy"/>
+          <div class="img-overlay"></div>
+          <div class="img-tint" style="background:rgba(39,174,96,0.12);"></div>
+          <div class="absolute top-4 left-4">
+            <div class="icon-box" style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.90);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" stroke="#27AE60" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-bold text-base mb-2" style="color:var(--ink);" data-mn="Эмнэлгийн тоног төхөөрөмж" data-en="Medical Devices">Эмнэлгийн тоног төхөөрөмж</h3>
+          <p class="text-sm" style="line-height:1.72;color:var(--muted);"
+             data-mn="Монголын эрүүл мэндийн байгууллага болон өвчтөнүүдийг дэмжих оношилгоо, хяналтын хэрэгсэл болон эмнэлгийн хэрэглэгдэхүүн."
+             data-en="Diagnostic tools, monitoring equipment, and consumables for Mongolia's healthcare institutions and patients.">
+            Монголын эрүүл мэндийн байгууллага болон өвчтөнүүдийг дэмжих оношилгоо, хяналтын хэрэгсэл болон эмнэлгийн хэрэглэгдэхүүн.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(39,174,96,0.10);color:var(--jade);" data-mn="Оношилгоо" data-en="Diagnostic">Оношилгоо</span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(39,174,96,0.10);color:var(--jade);" data-mn="Хяналт" data-en="Monitoring">Хяналт</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA card -->
+      <div class="rounded-2xl border-2 border-dashed flex flex-col items-center justify-center p-8 text-center reveal delay-3"
+           style="border-color:rgba(10,138,122,0.22);background:linear-gradient(135deg,rgba(10,138,122,0.04),rgba(39,174,96,0.04));">
+        <div class="w-14 h-14 rounded-2xl grad flex items-center justify-center mb-4">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg mb-2" style="color:var(--ink);"
+            data-mn="Хамтран ажиллах уу?" data-en="Interested in working together?">Хамтран ажиллах уу?</h3>
+        <p class="text-sm mb-5" style="line-height:1.72;color:var(--muted);"
+           data-mn="Та ямар бүтээгдэхүүн хэрэгтэй, юуг хайж байгаагаа бидэнд хэлэхэд л хангалттай."
+           data-en="Tell us what you need and what you're looking for. Let's find the right solution together.">
+          Та ямар бүтээгдэхүүн хэрэгтэй, юуг хайж байгаагаа бидэнд хэлэхэд л хангалттай.
+        </p>
+        <a href="#contact" class="btn-primary text-sm px-6 py-2.5"
+           data-mn="Ярилцацгаая" data-en="Let's Talk">Ярилцацгаая</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ VALUES ════════════════════════════════ -->
+<section id="values" class="section section-alt px-5 lg:px-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <div class="badge-tag mb-5" style="display:inline-flex;">
+        <span class="w-1.5 h-1.5 rounded-full" style="background:var(--teal);"></span>
+        <span data-mn="Бидний үнэт зүйлс" data-en="Our Values">Бидний үнэт зүйлс</span>
+      </div>
+      <h2 class="text-4xl font-bold" style="letter-spacing:-0.03em;color:var(--ink);"
+          data-mn="Бид Юунд Итгэдэг Вэ" data-en="What We Stand For">Бид Юунд Итгэдэг Вэ</h2>
+      <div class="divider mx-auto mt-4"></div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="value-card reveal delay-1">
+        <div class="icon-box mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke="#0A8A7A" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg mb-2" style="color:var(--ink);" data-mn="Чанар" data-en="Quality">Чанар</h3>
+        <p class="text-sm" style="line-height:1.72;color:var(--muted);"
+           data-mn="Бид зөвхөн ДЭМБ-ын GMP баталгаажуулсан үйлдвэрлэгчдийн бүтээгдэхүүнийг хангадаг. Ямар ч буулт байхгүй."
+           data-en="We source only from WHO-GMP certified manufacturers. No compromise, ever.">
+          Бид зөвхөн ДЭМБ-ын GMP баталгаажуулсан үйлдвэрлэгчдийн бүтээгдэхүүнийг хангадаг. Ямар ч буулт байхгүй.
+        </p>
+      </div>
+      <div class="value-card reveal delay-2">
+        <div class="icon-box mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke="#0A8A7A" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg mb-2" style="color:var(--ink);" data-mn="Итгэл" data-en="Integrity">Итгэл</h3>
+        <p class="text-sm" style="line-height:1.72;color:var(--muted);"
+           data-mn="Бид харилцагч нартайгаа шударга, ил тод харилцахыг эрхэмлэдэг. Итгэл бол бидний хамгийн чухал хөрөнгө юм."
+           data-en="We commit to honest, transparent relationships with all our partners. Trust is our most valued asset.">
+          Бид харилцагч нартайгаа шударга, ил тод харилцахыг эрхэмлэдэг. Итгэл бол бидний хамгийн чухал хөрөнгө юм.
+        </p>
+      </div>
+      <div class="value-card reveal delay-3">
+        <div class="icon-box mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" stroke="#27AE60" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg mb-2" style="color:var(--ink);" data-mn="Мэргэжил" data-en="Expertise">Мэргэжил</h3>
+        <p class="text-sm" style="line-height:1.72;color:var(--muted);"
+           data-mn="Манай баг нь эм зүй, эрүүл мэндийн салбарт мэргэшсэн бөгөөд хамтрагч байгууллагуудад мэргэжлийн зөвлөгөө өгдөг."
+           data-en="Our team has deep expertise in pharmacy and healthcare, providing professional guidance to partner organizations.">
+          Манай баг нь эм зүй, эрүүл мэндийн салбарт мэргэшсэн бөгөөд хамтрагч байгууллагуудад мэргэжлийн зөвлөгөө өгдөг.
+        </p>
+      </div>
+      <div class="value-card reveal delay-4">
+        <div class="icon-box mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#0A8A7A" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg mb-2" style="color:var(--ink);" data-mn="Дэлхийн стандарт" data-en="Global Standards">Дэлхийн стандарт</h3>
+        <p class="text-sm" style="line-height:1.72;color:var(--muted);"
+           data-mn="Бид дэлхийн тэргүүлэх үйлдвэрлэгчидтэй хамтран Монголд олон улсын чанарын бүтээгдэхүүнийг хүргэхийг зорьдог."
+           data-en="We partner with world-leading manufacturers to bring internationally certified products to the Mongolian market.">
+          Бид дэлхийн тэргүүлэх үйлдвэрлэгчидтэй хамтран Монголд олон улсын чанарын бүтээгдэхүүнийг хүргэхийг зорьдог.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ VISION BANNER ════════════════════════════════ -->
+<section class="section-navy py-20 px-5 lg:px-10">
+  <div class="max-w-4xl mx-auto text-center reveal">
+    <p class="text-xs font-bold uppercase tracking-widest mb-4" style="color:rgba(10,138,122,0.90);"
+       data-mn="Бидний алсын харааc" data-en="Our Vision">Бидний алсын харааc</p>
+    <h2 class="font-display text-4xl lg:text-5xl font-bold text-white mb-6" style="letter-spacing:-0.03em;line-height:1.12;"
+        data-mn='"Монгол улсын өрхийн эрүүл мэндийг дэлхийн чанарт хүргэнэ"'
+        data-en='"Bringing world-class health standards into every Mongolian home"'>
+      "Монгол улсын өрхийн эрүүл мэндийг дэлхийн чанарт хүргэнэ"
+    </h2>
+    <p class="text-sm max-w-2xl mx-auto" style="line-height:1.78;color:rgba(255,255,255,0.55);"
+       data-mn="Энэ бол бидний байгуулагдсан шалтгаан. Эм зүйн хангамжийн өндөр стандарт нь зөвхөн томоохон хотод биш, Монгол улсын хаана ч, хэний ч хүртээмжтэй байх ёстой."
+       data-en="This is why we were founded. High-standard pharmaceutical supply should be accessible to everyone across Mongolia — not just in major cities.">
+      Энэ бол бидний байгуулагдсан шалтгаан. Эм зүйн хангамжийн өндөр стандарт нь зөвхөн томоохон хотод биш, Монгол улсын хаана ч, хэний ч хүртээмжтэй байх ёстой.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ CONTACT ════════════════════════════════ -->
+<section id="contact" class="section section-alt px-5 lg:px-10">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+
+    <div class="reveal-left">
+      <div class="badge-tag mb-6">
+        <span class="w-1.5 h-1.5 rounded-full" style="background:var(--teal);"></span>
+        <span data-mn="Холбоо барих" data-en="Get in Touch">Холбоо барих</span>
+      </div>
+      <h2 class="text-4xl font-bold leading-tight mb-4" style="letter-spacing:-0.03em;color:var(--ink);"
+          data-mn="Хамтран Ажиллацгаая" data-en="Let's Work Together">Хамтран Ажиллацгаая</h2>
+      <div class="divider mb-6"></div>
+      <p class="text-sm mb-8" style="line-height:1.78;color:var(--muted);"
+         data-mn="Та эмийн сан, эмнэлэг, эрүүл мэндийн байгууллага эсвэл компани мөн бол бидэнтэй холбогдоорой. Бид таны хэрэгцээг ойлгон, хамтдаа шийдлийг олохыг зорьж байна."
+         data-en="Whether you're a pharmacy, hospital, healthcare institution, or a company — reach out to us. We are here to understand your needs and find the right solution together.">
+        Та эмийн сан, эмнэлэг, эрүүл мэндийн байгууллага эсвэл компани мөн бол бидэнтэй холбогдоорой. Бид таны хэрэгцээг ойлгон, хамтдаа шийдлийг олохыг зорьж байна.
+      </p>
+
+      <div class="space-y-3">
+        <div class="contact-item">
+          <div class="icon-box shrink-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke="#0A8A7A" stroke-width="1.75" stroke-linecap="round"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke="#0A8A7A" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wide mb-0.5" style="color:var(--teal);" data-mn="Хаяг" data-en="Address">Хаяг</p>
+            <p class="text-sm font-semibold" style="color:var(--ink);" data-mn="Улаанбаатар хот, Монгол улс" data-en="Ulaanbaatar, Mongolia">Улаанбаатар хот, Монгол улс</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon-box shrink-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke="#0A8A7A" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wide mb-0.5" style="color:var(--teal);" data-mn="Утас" data-en="Phone">Утас</p>
+            <p class="text-sm font-semibold" style="color:var(--ink);">+976 XXXX XXXX</p>
+            <p class="text-xs mt-0.5" style="color:var(--muted);" data-mn="Даваа–Баасан, 09:00–18:00" data-en="Mon–Fri, 9:00 AM – 6:00 PM">Даваа–Баасан, 09:00–18:00</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon-box shrink-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="#0A8A7A" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wide mb-0.5" style="color:var(--teal);">И-мэйл</p>
+            <p class="text-sm font-semibold" style="color:var(--ink);">info@epharma.mn</p>
+            <p class="text-xs mt-0.5" style="color:var(--muted);" data-mn="24 цагийн дотор хариу өгнө" data-en="We reply within 24 hours">24 цагийн дотор хариу өгнө</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal-right">
+      <div class="rounded-3xl p-8 border" style="background:var(--surface);border-color:var(--border2);box-shadow:var(--shadow-card);">
+        <h3 class="font-display font-bold text-2xl mb-6" style="color:var(--ink);"
+            data-mn="Мессеж илгээх" data-en="Send us a message">Мессеж илгээх</h3>
+        <form class="space-y-4" onsubmit="return false;">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wide mb-1.5" style="color:var(--muted);" data-mn="Нэр" data-en="First Name">Нэр</label>
+              <input type="text" placeholder="Бат" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wide mb-1.5" style="color:var(--muted);" data-mn="Овог" data-en="Last Name">Овог</label>
+              <input type="text" placeholder="Эрдэнэ" class="form-input" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wide mb-1.5" style="color:var(--muted);" data-mn="И-мэйл" data-en="Email">И-мэйл</label>
+            <input type="email" placeholder="ta@example.mn" class="form-input" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wide mb-1.5" style="color:var(--muted);" data-mn="Байгууллага" data-en="Organization">Байгууллага</label>
+            <input type="text"
+              data-placeholder-mn="Эмийн сан / Эмнэлэг / Байгууллага"
+              data-placeholder-en="Pharmacy / Hospital / Organization"
+              placeholder="Эмийн сан / Эмнэлэг / Байгууллага"
+              class="form-input" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wide mb-1.5" style="color:var(--muted);" data-mn="Мессеж" data-en="Message">Мессеж</label>
+            <textarea rows="4"
+              data-placeholder-mn="Ямар бүтээгдэхүүн, хамтын ажиллагаа сонирхож байгаагаа бичнэ үү…"
+              data-placeholder-en="Tell us what products or partnership you're interested in…"
+              placeholder="Ямар бүтээгдэхүүн, хамтын ажиллагаа сонирхож байгаагаа бичнэ үү…"
+              class="form-input resize-none"></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full text-sm py-3.5 justify-center font-bold"
+                  data-mn="Мессеж илгээх" data-en="Send Message">Мессеж илгээх</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ FOOTER ════════════════════════════════ -->
+<footer class="section-navy py-16 px-5 lg:px-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-10 pb-10 border-b" style="border-color:rgba(255,255,255,0.10);">
+      <div class="md:col-span-2">
+        <img src="brand_assets/ENERELT PHARMA final.png" alt="Enerelt Pharma" class="h-12 w-auto mb-4" style="filter:brightness(0) invert(1);" />
+        <p class="text-sm max-w-xs mb-4" style="line-height:1.78;color:rgba(255,255,255,0.50);"
+           data-mn="Монгол улсын эрүүл мэндийн зах зээлд чанарын эм, хүнсний нэмэлт бүтээгдэхүүн хүргэхийг зорьж байгуулагдсан эм зүйн импорт, дистрибьюшн компани."
+           data-en="A pharmaceutical import and distribution company founded to bring quality medicines and health supplements to Mongolia's healthcare market.">
+          Монгол улсын эрүүл мэндийн зах зээлд чанарын эм, хүнсний нэмэлт бүтээгдэхүүн хүргэхийг зорьж байгуулагдсан эм зүйн импорт, дистрибьюшн компани.
+        </p>
+        <p class="text-xs italic" style="color:rgba(255,255,255,0.30);"
+           data-mn='"Чанар хүргэж, Итгэл бий болгох"' data-en='"Delivering quality, Building trust"'>"Чанар хүргэж, Итгэл бий болгох"</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest mb-5" style="color:rgba(255,255,255,0.35);"
+           data-mn="Холдос холбоосууд" data-en="Quick Links">Холдос холбоосууд</p>
+        <ul class="space-y-3">
+          <li><a href="#about"    class="footer-link" data-mn="Бидний тухай"   data-en="About Us">Бидний тухай</a></li>
+          <li><a href="#focus"    class="footer-link" data-mn="Чиглэл"         data-en="Focus Areas">Чиглэл</a></li>
+          <li><a href="#values"   class="footer-link" data-mn="Үнэт зүйлс"     data-en="Values">Үнэт зүйлс</a></li>
+          <li><a href="#contact"  class="footer-link" data-mn="Холбоо барих"   data-en="Contact">Холбоо барих</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest mb-5" style="color:rgba(255,255,255,0.35);"
+           data-mn="Холбоо барих" data-en="Contact">Холбоо барих</p>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-2">
+            <svg class="shrink-0 mt-0.5" width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke="#0A8A7A" stroke-width="2" stroke-linecap="round"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke="#0A8A7A" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="text-sm" style="color:rgba(255,255,255,0.50);" data-mn="Улаанбаатар, Монгол улс" data-en="Ulaanbaatar, Mongolia">Улаанбаатар, Монгол улс</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="#0A8A7A" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="text-sm" style="color:rgba(255,255,255,0.50);">info@epharma.mn</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke="#0A8A7A" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="text-sm" style="color:rgba(255,255,255,0.50);">+976 XXXX XXXX</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs" style="color:rgba(255,255,255,0.28);"
+         data-mn="© 2026 Enerelt Pharma. Бүх эрх хуулиар хамгаалагдсан."
+         data-en="© 2026 Enerelt Pharma. All rights reserved.">© 2026 Enerelt Pharma. Бүх эрх хуулиар хамгаалагдсан.</p>
+      <p class="text-xs" style="color:rgba(255,255,255,0.28);"
+         data-mn="Монгол улсад бүртгэлтэй эм зүйн импортлогч &amp; дистрибьютор"
+         data-en="Registered pharmaceutical importer &amp; distributor — Mongolia">Монгол улсад бүртгэлтэй эм зүйн импортлогч &amp; дистрибьютор</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Language ── */
+let currentLang = 'mn';
+function setLang(lang) {
+  currentLang = lang;
+  ['btn-mn','btn-mn-m'].forEach(id => {
+    const el = document.getElementById(id); if (!el) return;
+    el.classList.toggle('active', lang === 'mn');
+  });
+  ['btn-en','btn-en-m'].forEach(id => {
+    const el = document.getElementById(id); if (!el) return;
+    el.classList.toggle('active', lang === 'en');
+  });
+  document.querySelectorAll('[data-mn][data-en]').forEach(el => {
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') return;
+    el.innerHTML = el.dataset[lang] || el.innerHTML;
+  });
+  document.querySelectorAll('[data-placeholder-mn]').forEach(el => {
+    const key = 'placeholder' + lang.charAt(0).toUpperCase() + lang.slice(1);
+    if (el.dataset[key]) el.placeholder = el.dataset[key];
+  });
+  document.documentElement.lang = lang;
+}
+
+/* ── Dark mode ── */
+const THEME_KEY = 'epharma_theme';
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem(THEME_KEY, t);
+  const icon = document.getElementById('theme-icon');
+  if (!icon) return;
+  if (t === 'dark') {
+    icon.innerHTML = '<circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
+  } else {
+    icon.innerHTML = '<path d="M21 12.6A8.5 8.5 0 1 1 11.4 3a6.5 6.5 0 0 0 9.6 9.6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
+  }
+}
+document.getElementById('theme-btn').addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  setTheme(current === 'dark' ? 'light' : 'dark');
+});
+const savedTheme = localStorage.getItem(THEME_KEY);
+if (savedTheme) setTheme(savedTheme);
+else if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark');
+
+/* ── Mobile menu ── */
+const toggle = document.getElementById('menu-toggle');
+const menu   = document.getElementById('mobile-menu');
+const iconO  = document.getElementById('icon-open');
+const iconC  = document.getElementById('icon-close');
+let open = false;
+toggle.addEventListener('click', () => {
+  open = !open;
+  menu.style.maxHeight = open ? menu.scrollHeight + 'px' : '0';
+  menu.style.opacity   = open ? '1' : '0';
+  iconO.classList.toggle('hidden', open);
+  iconC.classList.toggle('hidden', !open);
+});
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  open = false; menu.style.maxHeight = '0'; menu.style.opacity = '0';
+  iconO.classList.remove('hidden'); iconC.classList.add('hidden');
+}));
+
+/* ── Scroll progress ── */
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / h * 100) + '%';
+}, { passive: true });
+
+/* ── Scroll reveal ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
+}, { threshold: 0.10, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
